@@ -72,3 +72,5 @@ group :test do
 end
 
 gem "ruby-lsp", "~> 0.3.8"
+
+gem "pry", "~> 0.14.2"
