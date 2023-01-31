@@ -1,2 +1,5 @@
-class Api::Book < ApplicationRecord
+module Api
+  class Book < ApplicationRecord
+    belongs_to :genre
+  end
 end

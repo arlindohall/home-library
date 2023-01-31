@@ -1,17 +1,15 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  title: MyString
-  author: MyString
-  genre_id: 1
-  shelf_id: 1
-  isbn: MyString
-  scanned_identifier: MyString
+treasure_island:
+  title: "Treasure Island"
+  author: "Robert Louis Stevenson"
+  genre_id: <%= Api::Genre.find_by(name: "Fiction").id %>
+  isbn: "1234"
+  scanned_identifier: "1234"
 
-two:
-  title: MyString
-  author: MyString
-  genre_id: 1
-  shelf_id: 1
-  isbn: MyString
-  scanned_identifier: MyString
+three_body_problem:
+  title: "Three Body Problem"
+  author: "Cixin Liu"
+  genre_id: <%= Api::Genre.find_by(name: "Sci-Fi").id %>
+  isbn: "5678"
+  scanned_identifier: "5678"
