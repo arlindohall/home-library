@@ -1,3 +1,4 @@
+# typed: false
 module Api
   class BooksController < ApplicationController
     # TODO: create books
@@ -7,6 +8,8 @@ module Api
       # TODO: authenticate
       # TODO: paginate
       render json: Book.all
+    rescue => e
+      render json: { error: e.message }
     end
   end
 end

@@ -1,3 +1,4 @@
+# typed: true
 class CreateApiGenres < ActiveRecord::Migration[7.0]
   def change
     create_table :api_genres do |t|

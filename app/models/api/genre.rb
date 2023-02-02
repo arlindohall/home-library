@@ -1,3 +1,4 @@
+# typed: strict
 module Api
   class Genre < ApplicationRecord
     has_many :books

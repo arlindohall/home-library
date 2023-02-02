@@ -74,3 +74,7 @@ end
 gem "ruby-lsp", "~> 0.3.8"
 
 gem "pry", "~> 0.14.2"
+
+gem "sorbet", "~> 0.5.10644"
+
+gem "tapioca", "~> 0.7.3"
