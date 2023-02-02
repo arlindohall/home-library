@@ -1,8 +1,8 @@
 # typed: strict
 Rails.application.routes.draw do
   namespace :api do
-    resources :genres
-    resources :books
+    resources :genres, only: [:index]
+    resources :books, only: [:index]
   end
 
   root "static_pages#root"
