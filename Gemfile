@@ -78,3 +78,5 @@ gem "pry", "~> 0.14.2"
 gem "sorbet", "~> 0.5.10644"
 
 gem "tapioca", "~> 0.7.3"
+
+gem "foreman", "~> 0.87.2"

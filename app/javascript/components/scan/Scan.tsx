@@ -1,21 +1,22 @@
 
 import { TextField, Typography } from '@mui/material';
 import * as React from 'react';
-import { useNavigate } from 'react-router-dom';
 
 export default () => {
-  const navigate = useNavigate();
-  const onSubmit = React.useCallback((event) => {
-    const text = event.target[0].value;
-    navigate(`/scan/${text}`)
-  }, []);
+  const [formContent, setFormContent] = React.useState('');
+  const onChange = React.useCallback((event) => {
+    setFormContent(event.target.value)
+  }, [setFormContent]);
+  const onKeyPress = React.useCallback((event) => {
+    if (event.key === 'Enter') {
+      window.location.href = `/scan/${formContent}`;
+    }
+  }, [formContent]);
 
   return (
     <>
-      <form onSubmit={onSubmit}>
-        <Typography variant="h2">Scan</Typography>
-        <TextField autoFocus variant="standard"></TextField>
-      </form>
+      <Typography variant="h2">Scan</Typography>
+      <TextField onKeyPress={onKeyPress} autoFocus placeholder="Scan barcode" onChange={onChange}/>
     </>
   );
 }
