@@ -7,5 +7,7 @@ Rails.application.routes.draw do
 
   root "static_pages#root"
 
+  get "/scan/:scanned_id", to: "static_pages#scan"
+
   get "*path", to: "static_pages#root"
 end
