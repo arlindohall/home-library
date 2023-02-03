@@ -3,7 +3,8 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import { Books, Book, Scan } from './books';
+import { Books, Book } from './books';
+import { Scan } from './scan';
 import { NotFound } from './lib';
 
 // App structure taken from https://blog.dennisokeeffe.com/blog/2022-02-19-rails-7-using-react-with-esbuildom

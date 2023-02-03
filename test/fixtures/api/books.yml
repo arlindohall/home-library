@@ -3,13 +3,13 @@
 treasure_island:
   title: "Treasure Island"
   author: "Robert Louis Stevenson"
-  genre_id: <%= Api::Genre.find_by(name: "Fiction").id %>
+  genre: fiction
   isbn: "1234"
   scanned_identifier: "1234"
 
 three_body_problem:
   title: "Three Body Problem"
   author: "Cixin Liu"
-  genre_id: <%= Api::Genre.find_by(name: "Sci-Fi").id %>
+  genre: sci_fi
   isbn: "5678"
   scanned_identifier: "5678"
