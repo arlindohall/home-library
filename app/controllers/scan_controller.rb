@@ -1,6 +1,5 @@
 class ScanController < ApplicationController
   def show
-    # todo: this should be in scan_controller
     return redirect_to "/books/scan/#{scanned_id}" if scanned_book
 
     # todo: this should render a scan/details page where you select info
