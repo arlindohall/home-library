@@ -1,10 +1,13 @@
 class ScanController < ApplicationController
+  # TODO: instructions from other library readme
+  # TODO: setup and instructions for docker (not docker/rails)
+  # TODO: fix sorbet types
   def show
     return redirect_to "/books/scan/#{scanned_id}" if scanned_book
 
-    # todo: this should render a scan/details page where you select info
-    # todo: the scan details should redirect to scan
-    # todo: for some reason this page is blank, same as the problem described in the commit message
+    # TODO: this should render a scan/details page where you select info
+    # TODO: the scan details should redirect to scan
+    # TODO: for some reason this page is blank, same as the problem described in the commit message
     render "static_pages/root"
   end
 
