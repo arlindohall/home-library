@@ -1,7 +1,5 @@
 class ScanController < ApplicationController
   # TODO: instructions from other library readme
-  # TODO: setup and instructions for docker (not docker/rails)
-  # TODO: fix sorbet types
   def show
     return redirect_to "/books/scan/#{scanned_id}" if scanned_book
 
