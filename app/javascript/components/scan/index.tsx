@@ -1,3 +1,3 @@
 
-export { default as Scan } from './Scan';
-export { default as ScanDetails } from './ScanDetails';
+export { default as Scan } from './components/Scan';
+export { default as ScanDetails } from './components/ScanDetails';
