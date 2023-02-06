@@ -2,6 +2,7 @@
 import * as React from 'react';
 
 export type GoogleBooksData = {
+  index: number;
   title: string;
   author: string;
   description: string;
@@ -20,8 +21,9 @@ function isbn(data: any): string {
   return isbn10 || isbn13 || '';
 }
 
-function transformData(data: any): GoogleBooksData {
+function transformData(data: any, index: number): GoogleBooksData {
   return {
+    index,
     title: data?.volumeInfo?.title,
     author: data?.volumeInfo?.authors?.join(', '),
     description: data?.searchInfo?.textSnippet,
@@ -32,7 +34,7 @@ function transformData(data: any): GoogleBooksData {
 };
 
 export const useGoogleBooksData = (scanId: string | undefined) => {
-  const [googleBooksData, setGoogleBooksData] = React.useState<[GoogleBooksData?]>([]);
+  const [googleBooksData, setGoogleBooksData] = React.useState<[GoogleBooksData] | []>([]);
 
   React.useEffect(() => {
     if (!scanId) return;
@@ -44,7 +46,13 @@ export const useGoogleBooksData = (scanId: string | undefined) => {
       .then(setGoogleBooksData);
   }, [scanId]);
 
-  console.log({googleBooksData})
-
   return googleBooksData;
 };
+
+export const useSaveBook = () => {
+  return React.useCallback((book: GoogleBooksData | undefined) => {
+    if (!book) { return; }
+    // TODO: Save book to database once API exists
+    console.log(book);
+  }, []);
+}
