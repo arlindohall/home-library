@@ -20,8 +20,11 @@ module Api
 
     def show
       # TOOD: two loads?
-      @book = Book.find_by(scanned_identifier: scanned_id) if scanned_id
-      @book = Book.find(id) if id
+      if id
+        @book = Book.find(id)
+      elsif scanned_id
+        @book = Book.find_by(scanned_identifier: scanned_id)
+      end
 
       render json: { book: @book }
     rescue => e
@@ -35,7 +38,7 @@ module Api
     end
 
     def scanned_id
-      params[:scanned_identifier]
+      params[:scanned_id]
     end
 
     def book_params

@@ -9,10 +9,14 @@ type BookParams = {
   showTitle?: boolean;
 }
 
+const stopPropagation = (e: React.MouseEvent) => {
+  e.stopPropagation();
+};
+
 export default ({book, genre, showTitle=true}: BookParams) => {
   const genreContent = genre ? (
     <Typography variant="body2">
-      Genre: <Link onClick={(e) => e.stopPropagation()} href={`/genres/${genre.id}`}>{genre.name}</Link>
+      Genre: <Link onClick={stopPropagation} href={`/genres/${genre.id}`}>{genre.name}</Link>
     </Typography>
   ) : null;
 
@@ -32,8 +36,8 @@ export default ({book, genre, showTitle=true}: BookParams) => {
         }
         <Typography variant="body2">Author: {book.author}</Typography>
         {book.description && <Typography variant="body2">Description: {book.description}</Typography>}
-        <Typography variant="body2">ISBN: {book.isbn}</Typography>
-        <Typography variant="body2">Scanned Identifier: {book.scanned_identifier}</Typography>
+        <Typography onClick={stopPropagation} variant="body2">ISBN: {book.isbn}</Typography>
+        <Typography onClick={stopPropagation} variant="body2">Scanned Identifier: {book.scanned_identifier}</Typography>
         <Typography variant="body2">
           Google Books Link: <Link href={book.google_books_link}>{book.google_books_link}</Link>
         </Typography>

@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     resources :genres, only: [:index]
     resources :books, only: %i[index create show]
   end
+  get "/api/books/scan/:scanned_id", to: "api/books#show"
 
   root "static_pages#root"
 

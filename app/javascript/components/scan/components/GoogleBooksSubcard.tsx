@@ -11,6 +11,10 @@ export type GoogleBooksSubcardProps = {
   isDefault: boolean,
 }
 
+const stopPropagation = (e: React.MouseEvent) => {
+  e.stopPropagation();
+};
+
 export default ({
   data,
   isDefault,
@@ -50,11 +54,11 @@ export default ({
           <Typography variant="body1">{title}</Typography>
           <Typography variant="body2">Author: {author}</Typography>
           <Typography variant="body2">Description: {description}</Typography>
-          <Typography variant="body2">ISBN: {isbn}</Typography>
-          <Typography variant="body2" onClick={(e) => {e.stopPropagation()}}>
+          <Typography variant="body2" onClick={stopPropagation}>ISBN: {isbn}</Typography>
+          <Typography variant="body2" onClick={stopPropagation}>
             Google Books Link: <Link tabIndex={-1} href={googleBooksLink}>{googleBooksLink}</Link>
           </Typography>
-          <Typography variant="body2" onClick={(e) => {e.stopPropagation()}}>
+          <Typography variant="body2" onClick={stopPropagation}>
             Google Books API Link: <Link tabIndex={-1} href={googleBooksApiLink}>{googleBooksApiLink}</Link>
           </Typography>
         </CardContent>
