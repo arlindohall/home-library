@@ -14,7 +14,9 @@ export default ({
   return (
     <>
       <Stack spacing={2}>
-        {googleBooksData.map((data, index) => <GoogleBooksSubcard key={`google-book-subcard-${index}`} {...data}/>)}
+        {googleBooksData.map((data, index) => <GoogleBooksSubcard key={`google-book-subcard-${index}`}
+                                                                  isDefault={index === 0}
+                                                                  data={data}/>)}
       </Stack>
     </>
   );
