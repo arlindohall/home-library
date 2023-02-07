@@ -2,7 +2,7 @@
 Rails.application.routes.draw do
   namespace :api do
     resources :genres, only: [:index]
-    resources :books, only: %i[index create]
+    resources :books, only: %i[index create show]
   end
 
   root "static_pages#root"

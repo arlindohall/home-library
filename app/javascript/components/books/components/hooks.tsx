@@ -1,8 +1,7 @@
 
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
-import Book from './Book';
-import Genre from '../../genres/Genre';
+import { Book, Genre } from '../../lib/types';
 
 export const useBooks = () => {
   const [books, setBooks] = useState<Book[]>([]);
@@ -12,6 +11,27 @@ export const useBooks = () => {
       .then((data) => setBooks(data));
   }, []);
   return books;
+}
+
+export function useBook(id?: string, scannedId?: string): Book | null {
+  const [book, setBook] = useState<Book | null>(null);
+
+  useEffect(() => {
+    if (!id) { return; }
+    fetch(`/api/books/${id}`)
+      .then(response => response.json())
+      .then(response => response.book)
+      .then(setBook);
+  }, [id, setBook]);
+  useEffect(() => {
+    if (id || !scannedId) { return; }
+    fetch(`/api/books/scan/${scannedId}`)
+      .then(response => response.json())
+      .then(response => response.book)
+      .then(setBook);
+  }, [id, scannedId, setBook]);
+
+  return book;
 }
 
 export const useGenres = () => {

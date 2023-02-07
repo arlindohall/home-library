@@ -2,8 +2,9 @@
 import { Card, CardContent, Link, Typography } from '@mui/material';
 import * as React from 'react';
 import { useParams } from 'react-router';
+import { GoogleBooksData } from '../../lib/types';
 import useFocusRef from '../../lib/useFocusRef';
-import { GoogleBooksData, useSaveBook } from '../hooks';
+import { useSaveBook } from '../hooks';
 
 export type GoogleBooksSubcardProps = {
   data: GoogleBooksData,

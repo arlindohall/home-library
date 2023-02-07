@@ -1,14 +1,6 @@
 
 import * as React from 'react';
-
-export type GoogleBooksData = {
-  title: string;
-  author: string;
-  description: string;
-  isbn: string;
-  googleBooksLink: string;
-  googleBooksApiLink: string;
-}
+import { Book, GoogleBooksData } from '../lib/types';
 
 function isbn(data: any): string {
   // Courtesy of co-pilot
@@ -47,16 +39,6 @@ export const useGoogleBooksData = (scanId: string | undefined) => {
   return googleBooksData;
 };
 
-type Book = {
-  title: string;
-  author: string;
-  description: string;
-  isbn: string;
-  google_books_link: string;
-  google_books_api_link: string;
-  scanned_identifier: string;
-};
-
 export const useSaveBook = () => {
   return React.useCallback((
     book: GoogleBooksData,
@@ -65,7 +47,7 @@ export const useSaveBook = () => {
   ) => {
     const handleResponse = callback ?? (() => {});
 
-    const body = JSON.stringify({
+    const data: {book: Book} = {
       book: {
         title: book.title,
         author: book.author,
@@ -75,14 +57,14 @@ export const useSaveBook = () => {
         google_books_api_link: book.googleBooksApiLink,
         scanned_identifier: id,
       }
-    });
+    };
 
     const headers = {
       'Content-Type': 'application/json',
       'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '',
     };
 
-    fetch('/api/books', { method: 'POST', headers, body})
+    fetch('/api/books', { method: 'POST', headers, body: JSON.stringify(data)})
       .then(response => response.json())
       .then(handleResponse)
   }, []);

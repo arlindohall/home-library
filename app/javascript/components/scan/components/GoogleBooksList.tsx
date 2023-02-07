@@ -1,7 +1,7 @@
 
 import { Stack } from '@mui/material';
 import * as React from 'react';
-import { GoogleBooksData } from '../hooks';
+import { GoogleBooksData } from '../../lib/types';
 import GoogleBooksSubcard from './GoogleBooksSubcard';
 
 export type GoogleBooksListProps = {
