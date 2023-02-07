@@ -47,10 +47,43 @@ export const useGoogleBooksData = (scanId: string | undefined) => {
   return googleBooksData;
 };
 
+type Book = {
+  title: string;
+  author: string;
+  description: string;
+  isbn: string;
+  google_books_link: string;
+  google_books_api_link: string;
+  scanned_identifier: string;
+};
+
 export const useSaveBook = () => {
-  return React.useCallback((book: GoogleBooksData | undefined) => {
-    if (!book) { return; }
-    // TODO: Save book to database once API exists
-    console.log(book);
+  return React.useCallback((
+    book: GoogleBooksData,
+    id: string,
+    callback?: (b: Book) => void
+  ) => {
+    const handleResponse = callback ?? (() => {});
+
+    const body = JSON.stringify({
+      book: {
+        title: book.title,
+        author: book.author,
+        description: book.description,
+        isbn: book.isbn,
+        google_books_link: book.googleBooksLink,
+        google_books_api_link: book.googleBooksApiLink,
+        scanned_identifier: id,
+      }
+    });
+
+    const headers = {
+      'Content-Type': 'application/json',
+      'X-CSRF-Token': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '',
+    };
+
+    fetch('/api/books', { method: 'POST', headers, body})
+      .then(response => response.json())
+      .then(handleResponse)
   }, []);
 }

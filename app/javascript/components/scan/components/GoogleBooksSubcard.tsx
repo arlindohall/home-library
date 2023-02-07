@@ -1,6 +1,7 @@
 
 import { Card, CardContent, Link, Typography } from '@mui/material';
 import * as React from 'react';
+import { useParams } from 'react-router';
 import useFocusRef from '../../lib/useFocusRef';
 import { GoogleBooksData, useSaveBook } from '../hooks';
 
@@ -14,9 +15,16 @@ export default ({
   isDefault,
 }: GoogleBooksSubcardProps) => {
   const saveBook = useSaveBook();
+
+  const { id } = useParams();
+  const redirect = React.useCallback(() => {
+    window.location.href = '/scan';
+  }, []);
+
   const submit = React.useCallback(() => {
-    saveBook(data)
-  }, [saveBook]);
+    if (!id) { return; }
+    saveBook(data, id, redirect)
+  }, [saveBook, id, redirect]);
 
   const handleEnter = React.useCallback((event) => {
     if (event.key === 'Enter') {
