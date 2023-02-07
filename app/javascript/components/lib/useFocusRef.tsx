@@ -1,13 +1,11 @@
 
 import * as React from 'react';
 
-export default function<T extends HTMLElement> (): React.RefObject<T> {
+export default function useFocusRef<T extends HTMLElement>(): [React.RefObject<T>, () => void] {
   const ref = React.createRef<T>();
-  React.useEffect(() => {
-    if (ref == null) { return; }
-
+  const focus = React.useCallback(() => {
     ref?.current?.focus();
   }, [ref]);
 
-  return ref;
+  return [ref, focus];
 };

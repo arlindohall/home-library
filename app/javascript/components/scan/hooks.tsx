@@ -2,7 +2,6 @@
 import * as React from 'react';
 
 export type GoogleBooksData = {
-  index: number;
   title: string;
   author: string;
   description: string;
@@ -23,7 +22,6 @@ function isbn(data: any): string {
 
 function transformData(data: any, index: number): GoogleBooksData {
   return {
-    index,
     title: data?.volumeInfo?.title,
     author: data?.volumeInfo?.authors?.join(', '),
     description: data?.searchInfo?.textSnippet,

@@ -1,6 +1,7 @@
 
-import { Card, CardContent, Link, Radio, Typography } from '@mui/material';
+import { Card, CardContent, Link, Typography } from '@mui/material';
 import * as React from 'react';
+import { useSaveBook } from '../hooks';
 
 export type GoogleBooksSubcardProps = {
   title: string;
@@ -9,10 +10,6 @@ export type GoogleBooksSubcardProps = {
   isbn: string;
   googleBooksLink: string;
   googleBooksApiLink: string;
-  index: number;
-  select: () => void;
-  selected: boolean;
-  listenForEnter: (event: React.KeyboardEvent) => void;
 }
 
 export default ({
@@ -22,18 +19,17 @@ export default ({
   isbn,
   googleBooksLink,
   googleBooksApiLink,
-  select,
-  selected,
-  listenForEnter,
 }: GoogleBooksSubcardProps) => {
+  const saveBook = useSaveBook();
+  const submit = React.useCallback(() => {
+    saveBook({ title, author, description, isbn, googleBooksLink, googleBooksApiLink })
+  }, [saveBook]);
+
   return (
     <>
-      <Card onClick={select}>
+      <Card onClick={submit}>
         <CardContent>
-          <Typography variant="body1">
-            <Radio onKeyDown={listenForEnter} size="small" onClick={select} checked={selected}/>
-            {title}
-          </Typography>
+          <Typography variant="body1">{title}</Typography>
           <Typography variant="body2">Author: {author}</Typography>
           <Typography variant="body2">Description: {description}</Typography>
           <Typography variant="body2">ISBN: {isbn}</Typography>
