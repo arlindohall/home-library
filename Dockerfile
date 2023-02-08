@@ -8,4 +8,6 @@ COPY ./ /app
 
 RUN bundle
 
-ENTRYPOINT ["/app/bin/rails", "server"]
+EXPOSE 3000
+
+ENTRYPOINT ["/app/bin/rails", "server", "-b", "0.0.0.0"]
