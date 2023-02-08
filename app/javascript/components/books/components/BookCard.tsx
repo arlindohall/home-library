@@ -6,14 +6,16 @@ import { Book, Genre } from '../../lib/types';
 type BookParams = {
   book: Book;
   genre?: Genre;
-  showTitle?: boolean;
+  standalone?: boolean;
 }
 
 const stopPropagation = (e: React.MouseEvent) => {
   e.stopPropagation();
 };
 
-export default ({book, genre, showTitle=true}: BookParams) => {
+const noop = () => {};
+
+export default ({book, genre, standalone=false}: BookParams) => {
   const genreContent = genre ? (
     <Typography variant="body2">
       Genre: <Link onClick={stopPropagation} href={`/genres/${genre.id}`}>{genre.name}</Link>
@@ -25,10 +27,10 @@ export default ({book, genre, showTitle=true}: BookParams) => {
   }, [])
 
   return (
-    <Card onClick={onClick}>
+    <Card onClick={standalone ? noop : onClick}>
       <CardContent>
         {
-          showTitle && (
+          standalone ? null : (
             <Typography variant="body1">
               Title: <Link href={`/books/${book.id}`}>{book.title}</Link>
             </Typography>

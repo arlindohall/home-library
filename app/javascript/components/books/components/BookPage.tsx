@@ -4,7 +4,6 @@ import * as React from 'react';
 import { useParams } from 'react-router';
 
 import NotFound from '../../lib/NotFound';
-import { Book } from '../../lib/types';
 import BookCard from './BookCard';
 import { useBook, useGenres } from './hooks';
 
@@ -23,7 +22,7 @@ export default () => {
   return (
     <>
       <Typography variant="h1">{book.title}</Typography>
-      <BookCard book={book} genre={genre} showTitle={false}/>
+      <BookCard book={book} genre={genre} standalone/>
     </>
   );
 }

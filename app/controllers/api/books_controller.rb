@@ -19,12 +19,15 @@ module Api
     end
 
     def show
-      # TOOD: two loads?
-      if id
-        @book = Book.find(id)
-      elsif scanned_id
-        @book = Book.find_by(scanned_identifier: scanned_id)
-      end
+      @book = Book.find(id)
+
+      render json: { book: @book }
+    rescue => e
+      render json: { error: e.message, status: 500 }
+    end
+
+    def show_scan
+      @book = Book.find_by(scanned_identifier: scanned_id)
 
       render json: { book: @book }
     rescue => e
