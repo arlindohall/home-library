@@ -19,5 +19,6 @@ system(<<-bash)
     -v ./db/:/app/db/         \
     -v ./config/:/app/config/ \
     -p #{$port}:3000          \
-    home-library:latest
+    -e ENVIRONMENT            \
+    home-library:latest #{ARGV.join(" ")}
 bash
