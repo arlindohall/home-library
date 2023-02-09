@@ -7,8 +7,9 @@ RUN cd /app
 COPY ./ /app
 
 RUN bundle
-RUN app update
-RUN apt install -y npm
+RUN apt update -y
+RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - \
+    && apt-get install -y nodejs
 RUN npm install -g yarn
 RUN ./bin/rails assets:precompile
 
