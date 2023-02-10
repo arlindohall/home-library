@@ -1,41 +1,40 @@
 
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
-import { Book, Genre } from '../../lib/types';
+import { Book, BookList, BookResult, GenreList } from '../../lib/types';
 
-export const useBooks = () => {
-  const [books, setBooks] = useState<Book[]>([]);
+export const useBooks = (): [Book[]?, string?] => {
+  const [books, setBooks] = useState<BookList>({});
   useEffect(() => {
     fetch('/api/books')
       .then((response) => response.json())
       .then((data) => setBooks(data));
   }, []);
-  return books;
+
+  return [books.books, books.error];
 }
 
-export function useBook(id?: string, scannedId?: string): Book | null {
-  const [book, setBook] = useState<Book | null>(null);
+export function useBook(id?: string, scannedId?: string): [Book?, string?] {
+  const [book, setBook] = useState<BookResult>({});
 
   useEffect(() => {
     if (!id) { return; }
     fetch(`/api/books/${id}`)
       .then(response => response.json())
-      .then(response => response.book)
       .then(setBook);
   }, [id, setBook]);
   useEffect(() => {
     if (id || !scannedId) { return; }
     fetch(`/api/books/scan/${scannedId}`)
       .then(response => response.json())
-      .then(response => response.book)
       .then(setBook);
   }, [id, scannedId, setBook]);
 
-  return book;
+  return [book.book, book.error];
 }
 
-export const useGenres = () => {
-  const [genres, setGenres] = useState<Genre[]>([]);
+export function useGenres(): [any, string?] {
+  const [genres, setGenres] = useState<GenreList>({});
   useEffect(() => {
     fetch('/api/genres')
       .then((response) => response.json())
@@ -43,9 +42,9 @@ export const useGenres = () => {
   }, []);
 
   const genreMap = {};
-  genres?.forEach((genre) => {
+  genres.genres?.forEach((genre) => {
     genreMap[genre.id] = genre;
   });
 
-  return genreMap;
+  return [genreMap, genres.error];
 };

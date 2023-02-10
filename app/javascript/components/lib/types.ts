@@ -1,4 +1,12 @@
 
+export type Result = {
+  error?: string;
+}
+
+export type GenreList = { genres?: Genre[] } & Result;
+export type BookList = { books?: Book[] } & Result;
+export type BookResult = { book?: Book } & Result;
+
 export type Genre = {
   id: string;
   name: string;

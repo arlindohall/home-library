@@ -2,6 +2,7 @@
 import { Typography } from '@mui/material';
 import * as React from 'react';
 import { useParams } from 'react-router';
+import ErrorPage from '../../lib/ErrorPage';
 
 import NotFound from '../../lib/NotFound';
 import BookCard from './BookCard';
@@ -10,8 +11,16 @@ import { useBook, useGenres } from './hooks';
 export default () => {
   const { id, scannedId } = useParams();
 
-  const book = useBook(id, scannedId);
-  const genres = useGenres();
+  const [book, bookError] = useBook(id, scannedId);
+  const [genres, genreError] = useGenres();
+
+  if (bookError) {
+    return <ErrorPage message={bookError}/>;
+  }
+
+  if (genreError) {
+    return <ErrorPage message={genreError}/>;
+  }
 
   if (!book) {
     return <NotFound message={`Book ${id || scannedId} does not exist`} />;

@@ -1,11 +1,15 @@
 # typed: false
 module Api
   class BooksController < ApplicationController
+    # TODO: shelves_controller categorize in to shelves
+    # TODO: allow exporting all books/genres/shelves
+    # TODO: search books
+    # TODO: error handling in JS
     def index
       # TODO: authenticate
       # TODO: paginate
       @books = Book.all
-      render json: @books
+      render json: { books: @books }
     rescue => e
       render json: { error: e.message, status: 500 }
     end

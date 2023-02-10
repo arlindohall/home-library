@@ -2,7 +2,8 @@
 module Api
   class GenresController < ApplicationController
     def index
-      render json: Genre.all
+      @genres = Genre.all
+      render json: { genres: @genres }
     rescue => e
       render json: { error: e.message }, status: 500
     end
