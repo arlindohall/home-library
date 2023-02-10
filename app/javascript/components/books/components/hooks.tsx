@@ -43,7 +43,7 @@ export const useGenres = () => {
   }, []);
 
   const genreMap = {};
-  genres.forEach((genre) => {
+  genres?.forEach((genre) => {
     genreMap[genre.id] = genre;
   });
 

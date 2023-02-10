@@ -1,0 +1,7 @@
+#!/bin/bash
+
+export RAILS_SERVE_STATIC_FILES=true
+export RAILS_ENV=production
+
+rails db:migrate
+rails server -b 0.0.0.0
