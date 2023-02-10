@@ -9,16 +9,14 @@ unless system("#{$command} image ls -a | grep home-library")
   exit 1
 end
 
-$restart = ENV["RESTART"] ? "unless-stopped" : ""
-$rm = ENV["RESTART"] ? "" : "--rm"
+$restart = ENV["RESTART"] ? "-d --restart=unless-stopped" : "-it --rm"
 
 system(<<-bash)
-  #{$command} run -it         \
-    #{$restart} #{$rm}        \
-    --name home-library       \
-    -v ./db/:/app/db/         \
-    -v ./config/:/app/config/ \
-    -p #{$port}:3000          \
-    -e ENVIRONMENT            \
+#{$command} run                             \
+  #{$restart}                               \
+  --name home-library                       \
+  -v ./:/app/                               \
+  -p #{$port}:3000                          \
+  -e ENVIRONMENT=production                 \
     home-library:latest #{ARGV.join(" ")}
 bash
