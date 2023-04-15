@@ -6,6 +6,8 @@ RUN cd /app
 
 COPY ./ /app/
 
+RUN rm Gemfile.lock
+
 RUN apt update -y
 RUN curl -sL https://deb.nodesource.com/setup_14.x | bash - \
     && apt-get install -y nodejs
