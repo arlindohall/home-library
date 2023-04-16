@@ -1,5 +1,6 @@
 #!/usr/bin/env ruby
 
+require "fileutils"
 require "pathname"
 
 @port = ENV["PORT"] || 8080
