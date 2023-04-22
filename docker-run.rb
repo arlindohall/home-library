@@ -3,7 +3,7 @@
 require "fileutils"
 require "pathname"
 
-@port = ENV["PORT"] || 8080
+@port = ENV["PORT"] || "127.0.0.1:8080"
 @dir = ENV["DIR"] || Pathname.new("/home/miller/var/")
 
 def create_db_file
